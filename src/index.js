@@ -15,52 +15,85 @@ import '../assets/css/style.css';
 //   }
 // }
 
-// Understanding the this keyword, call, apply, and bind
+// // Understanding the this keyword, call, apply, and bind
 
-//Implicit binding
-var me={
-  name: 'Joaquin',
-  age:24, 
-  sayName: function(){
-    console.log(this.name);
+// //Implicit binding
+// var me={
+//   name: 'Joaquin',
+//   age:24, 
+//   sayName: function(){
+//     console.log(this.name);
+//   }
+// }
+
+// me.sayName();
+
+// //Explicit binding
+// var sayName = function(lang1, lang2, lang3){
+//   console.log('My name is:' + this.name + 'and I know'+'  ' +lang1+'  '+lang2+'  '+lang3)
+// }
+// var stacey ={
+//   name: 'Stacey',
+//   age: 34
+// };
+// var languages=['JavaScript','Ruby', 'Python']
+
+// sayName.call(stacey, languages[0], languages[1], languages[2]);
+// sayName.apply(stacey, languages);
+// var newFn=sayName.bind(stacey, languages[0], languages[1], languages[2]);
+
+// console.log(newFn);
+
+// //New binding
+// var Animal = function(color, name, type){
+// this.color = color;
+// this.name= name;
+// this.type= type;
+
+// };
+
+// var zebra = new Animal('black and white', 'zorro', 'zebra')
+// console.log(zebra);
+
+// //Window binding
+
+// var sayAge = function(){
+//   console.log(this.age)
+// };
+
+// window.age=30;
+// sayAge();
+
+//Inheritance
+
+
+class Animal {
+  constructor(name, energy) {
+    this.name = name
+    this.energy = energy
+  }
+  eat(amount) {
+    console.log(`${this.name} is eating.`)
+    this.energy += amount
+  }
+  sleep(length) {
+    console.log(`${this.name} is sleeping.`)
+    this.energy += length
+  }
+  play(length) {
+    console.log(`${this.name} is playing.`)
+    this.energy -= length
   }
 }
 
-me.sayName();
+class Dog extends Animal {
+  constructor(name, energy, breed) {
+    super(name, energy) // calls Animal's constructor
 
-//Explicit binding
-var sayName = function(lang1, lang2, lang3){
-  console.log('My name is:' + this.name + 'and I know'+'  ' +lang1+'  '+lang2+'  '+lang3)
+    this.breed = breed
+  }
+  bark() {
+    console.log('Woof Woof!')
+    this.energy -= .1
+  }
 }
-var stacey ={
-  name: 'Stacey',
-  age: 34
-};
-var languages=['JavaScript','Ruby', 'Python']
-
-sayName.call(stacey, languages[0], languages[1], languages[2]);
-sayName.apply(stacey, languages);
-var newFn=sayName.bind(stacey, languages[0], languages[1], languages[2]);
-
-console.log(newFn);
-
-//New binding
-var Animal = function(color, name, type){
-this.color = color;
-this.name= name;
-this.type= type;
-
-};
-
-var zebra = new Animal('black and white', 'zorro', 'zebra')
-console.log(zebra);
-
-//Window binding
-
-var sayAge = function(){
-  console.log(this.age)
-};
-
-window.age=30;
-sayAge();
-
